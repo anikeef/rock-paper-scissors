@@ -1,0 +1,2 @@
+Project goal: 
+Practice JavaScript
