@@ -4,50 +4,76 @@
 	<title>Rock, paper, scissors</title>
 </head>
 <body>
+<button class='choise' id='rock'>Rock</button>
+<button class='choise' id='paper'>Paper</button>
+<button class='choise' id='scissors'>Scissors</button>
+
+<div class='results'>
+	<div class="message">
+	</div>
+	<div class="score">
+	</div>
+</div>
 
 <script type="text/javascript">
-	let playerScore = 0;
-	let computerScore = 0;
+let playerScore = 0;
+let computerScore = 0;
 
-	function computerPlay() {
-		let randomNumber = Math.random();
-		return (randomNumber < 1/3) ? 'rock' :
-			   (randomNumber < 2/3) ? 'paper' :
-					 				  'scissors';
-	}
+function computerPlay() {
+	let randomNumber = Math.random();
+	return (randomNumber < 1/3) ? 'rock' :
+		   (randomNumber < 2/3) ? 'paper' :
+				 				  'scissors';
+}
 
-	function askPlayer() {
-		return prompt('Rock, paper or scissors?');
-	}
-
-	function playRound(playerSelection = askPlayer(), computerSelection = computerPlay()) {
-		playerSelection = playerSelection.toLowerCase();
-		let loss = (playerSelection === 'rock') && (computerSelection === 'paper') ||
-		   		   (playerSelection === 'paper') && (computerSelection === 'scissors') ||
-		   		   (playerSelection === 'scissors') && (computerSelection === 'rock');
-		let win = (playerSelection === 'rock') && (computerSelection === 'scissors') ||
-				  (playerSelection === 'paper') && (computerSelection === 'rock') ||
-				  (playerSelection === 'scissors') && (computerSelection === 'paper'); 
-		if (win) {
-				playerScore += 1;
-				return ('You win! ' + playerSelection + ' beats ' + computerSelection);
-			} else if (loss) {
-				computerScore += 1;
-				return ('You lose! ' + computerSelection + ' beats ' + playerSelection);
-			} else {
-				return ('Try again, computer has ' + computerSelection + ' too');
-			}
-	}
-
-	function game() {
-		for (var i = 0; i < 5; i++) {
-			console.log(playRound());
+function roundResult(playerSelection, computerSelection = computerPlay()) {
+	playerSelection = playerSelection.toLowerCase();
+	let loss = (playerSelection === 'rock') && (computerSelection === 'paper') ||
+	   		   (playerSelection === 'paper') && (computerSelection === 'scissors') ||
+	   		   (playerSelection === 'scissors') && (computerSelection === 'rock');
+	let win = (playerSelection === 'rock') && (computerSelection === 'scissors') ||
+			  (playerSelection === 'paper') && (computerSelection === 'rock') ||
+			  (playerSelection === 'scissors') && (computerSelection === 'paper'); 
+	if (win) {
+			playerScore += 1;
+			return ('You win! ' + playerSelection + ' beats ' + computerSelection);
+		} else if (loss) {
+			computerScore += 1;
+			return ('You lose! ' + computerSelection + ' beats ' + playerSelection);
+		} else {
+			return ('Try again, computer has ' + computerSelection + ' too');
 		}
-		console.log(computerScore + ':' + playerScore);
-	}
+}
 
-	game();
+let message = document.querySelector('.message');
+let score = document.querySelector('.score');
+let buttons = Array.from(document.querySelectorAll('.choise'));
+
+buttons.forEach(button => 
+	button.addEventListener('click', function(e) {
+		message.textContent = roundResult(e.target.getAttribute('id'));
+		score.textContent = playerScore + ':' + computerScore;
+
+		if (computerScore === 5) {
+			message.textContent = 'You are looser';
+			buttons.forEach(button => button.setAttribute('disabled', 'disabled'));
+		} else if (playerScore === 5) {
+			message.textContent = 'You are winner';
+			buttons.forEach(button => button.setAttribute('disabled', 'disabled'));
+		}
+	})
+)
+
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
