@@ -30,7 +30,7 @@ function playRound(playerSelection, computerSelection = computerPlay()) {
 			return ('Great! Your ' + playerSelection + ' beats my ' + computerSelection);
 		} else if (loss) {
 			computerScore += 1;
-			return ('Sorry, but my ' + computerSelection + ' beats your ' + playerSelection);
+			return ('Sorry, but my ' + computerSelection + ' beats ' + playerSelection);
 		} else {
 			return ('Try again, I have ' + computerSelection + ' too');
 		}
