@@ -27,12 +27,12 @@ function playRound(playerSelection, computerSelection = computerPlay()) {
 			  (playerSelection === 'scissors') && (computerSelection === 'paper'); 
 	if (win) {
 			playerScore += 1;
-			return ('You win! ' + playerSelection + ' beats ' + computerSelection);
+			return ('Great! Your ' + playerSelection + ' beats my ' + computerSelection);
 		} else if (loss) {
 			computerScore += 1;
-			return ('You lose! ' + computerSelection + ' beats ' + playerSelection);
+			return ('Sorry, but my ' + computerSelection + ' beats your ' + playerSelection);
 		} else {
-			return ('Try again, computer has ' + computerSelection + ' too');
+			return ('Try again, I have ' + computerSelection + ' too');
 		}
 }
 
@@ -44,7 +44,7 @@ const buttons = Array.from(document.querySelectorAll('.choise'));
 const restart = document.querySelector('.restart');
 
 displayResults();
-message.textContent = 'Let\'s go!'
+message.textContent = 'The first to reach 5 points wins'
 
 buttons.forEach(button => 
 	button.addEventListener('click', function(e) {
@@ -71,7 +71,7 @@ restart.addEventListener('click', function() {
 	displayResults();
 	restart.setAttribute('hidden', 'hidden');
 	buttons.forEach(button => button.removeAttribute('disabled'));
-	message.textContent = 'Let\'s go!';
+	message.textContent = 'The first to reach 5 points wins';
 	message.style.color = 'black';
 	score.style.color = 'black';
 })
