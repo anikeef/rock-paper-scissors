@@ -6,7 +6,7 @@ function displayResults() {
 }
 
 function endGame() {
-	buttons.forEach(button => button.setAttribute('disabled', 'disabled'));
+	buttons.forEach(function(button) {button.setAttribute('disabled', 'disabled')});
 	restart.removeAttribute('hidden');
 }
 
@@ -46,7 +46,7 @@ const restart = document.querySelector('.restart');
 displayResults();
 message.textContent = 'The first to reach 5 points wins'
 
-buttons.forEach(button =>
+buttons.forEach(function(button) {
 	button.addEventListener('click', function(e) {
 		message.textContent = playRound(e.target.getAttribute('id'));
 		displayResults();
@@ -63,14 +63,14 @@ buttons.forEach(button =>
 			endGame();
 		}
 	})
-)
+})
 
 restart.addEventListener('click', function() {
 	playerScore = 0;
 	computerScore = 0;
 	displayResults();
 	restart.setAttribute('hidden', 'hidden');
-	buttons.forEach(button => button.removeAttribute('disabled'));
+	buttons.forEach(function(button) {button.removeAttribute('disabled')});
 	message.textContent = 'The first to reach 5 points wins';
 	message.style.color = 'black';
 	score.style.color = 'black';
