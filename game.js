@@ -1,5 +1,5 @@
-let playerScore = 0;
-let computerScore = 0;
+var playerScore = 0;
+var computerScore = 0;
 
 function displayResults() {
 	score.textContent = playerScore + ':' + computerScore;
@@ -11,7 +11,7 @@ function endGame() {
 }
 
 function computerPlay() {
-	let randomNumber = Math.random();
+	var randomNumber = Math.random();
 	return (randomNumber < 1/3) ? 'rock' :
 		   (randomNumber < 2/3) ? 'paper' :
 				 				  'scissors';
@@ -24,7 +24,7 @@ function playRound(playerSelection, computerSelection = computerPlay()) {
 	   		   (playerSelection === 'scissors') && (computerSelection === 'rock');
 	const win = (playerSelection === 'rock') && (computerSelection === 'scissors') ||
 			  (playerSelection === 'paper') && (computerSelection === 'rock') ||
-			  (playerSelection === 'scissors') && (computerSelection === 'paper'); 
+			  (playerSelection === 'scissors') && (computerSelection === 'paper');
 	if (win) {
 			playerScore += 1;
 			return ('Great! Your ' + playerSelection + ' beats my ' + computerSelection);
@@ -46,7 +46,7 @@ const restart = document.querySelector('.restart');
 displayResults();
 message.textContent = 'The first to reach 5 points wins'
 
-buttons.forEach(button => 
+buttons.forEach(button =>
 	button.addEventListener('click', function(e) {
 		message.textContent = playRound(e.target.getAttribute('id'));
 		displayResults();
@@ -75,7 +75,3 @@ restart.addEventListener('click', function() {
 	message.style.color = 'black';
 	score.style.color = 'black';
 })
-
-
-
-
